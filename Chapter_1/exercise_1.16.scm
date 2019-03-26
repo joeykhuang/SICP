@@ -10,3 +10,6 @@
     (if (is-even? n)
         (expt-iter b (/ n 2) a)
         (* (expt-iter b (/ (- n 1) 2) a) b)))
+
+(define (fast-expt b n)
+    (calc-expt b n 1))
