@@ -1,12 +1,10 @@
-#lang scheme
 (define (timed-prime-test n)
     (newline)
     (display n)
     (start-prime-test n (current-inexact-milliseconds)))
 (define (start-prime-test n start-time)
     (if (is-prime? n)
-        (report-prime (- (current-inexact-milliseconds) start-time))
-        (display " 0")))
+        (report-prime (- (current-inexact-milliseconds) start-time))))
 (define (report-prime elapsed-time)
     (display " *** ")
     (display elapsed-time))
@@ -28,8 +26,3 @@
           ((divides? test-divisor n) test-divisor)
           (else (find-divisor n (+ test-divisor 1)))))
 (define (divides? a b) (= (remainder b a) 0))
-(define (square n) (* n n))
-
-(search-for-primes 1000 1020)
-(search-for-primes 10000 10040)
-(search-for-primes 100000 100050)
