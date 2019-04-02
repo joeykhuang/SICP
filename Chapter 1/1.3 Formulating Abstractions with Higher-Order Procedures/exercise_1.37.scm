@@ -11,3 +11,11 @@
         (search-phi (cont-frac (lambda (i) 1.0) (lambda (i) 1.0) (+ k 1)) (+ k 1))))
 
 (search-phi 0 1)
+
+; part b: iterative-process
+(define (cont-frac n d k)
+    (define (cont-frac-iter k result)
+        (if (= k 0)
+            result
+            (cont-frac-iter (- k 1) (/ (n k) (+ (d k) result)))))
+    (cont-frac-iter k 0))
