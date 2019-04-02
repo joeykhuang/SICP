@@ -5,4 +5,4 @@
           ((= (remainder k 3) 2) (* 2 (/ (+ k 1) 3)))
           (else 1)))
 
-(+ 2 (cont-frac-recur (lambda (i) 1.0) euler-d 2000))
+(+ 2 (cont-frac-iter (lambda (i) 1.0) euler-d 2000))
