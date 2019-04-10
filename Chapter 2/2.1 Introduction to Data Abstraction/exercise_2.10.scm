@@ -1,0 +1,5 @@
+(load "Chapter 2/2.1 Introduction to Data Abstraction/exercise_2.9.scm")
+(define (div-interval-check x y)
+    (if (= (width y) 0)
+        (display "Error: Dividing by interval spanning 0")
+        (div-interval x y)))
