@@ -1,0 +1,8 @@
+(load "Chapter 2/2.1 Introduction to Data Abstraction/interval_abstractions.scm")
+(define (mul-interval-simplified x y)
+    (cond ((and (and (< (lower-bound x) 0) (< (upper-bound x) 0))
+           (and (< (lower-bound y) 0) (< (upper-bound y) 0)))
+                (mul-interval x y))
+          (())
+        (make-interval (* (lower-bound x) (lower-bound y))
+                       (* (upper-bound x) (upper-bound y)))))
