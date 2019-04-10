@@ -36,11 +36,4 @@
 (define (width z)
     (/ (- (upper-bound z) (lower-bound z)) 2))
 
-; center-error constructor
 
-(define (make-center-error c e)
-    (make-interval (- c (* c e)) (+ c (* c e))))
-(define (center-error z)
-    (center-width z))
-(define (error z)
-    (/ (width z) (center-error z)))
