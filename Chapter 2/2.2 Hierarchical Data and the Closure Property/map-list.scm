@@ -1,0 +1,6 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/list-operations.scm")
+(define (map proc items)
+    (if (null? items)
+        '()
+        (cons (proc (car items))
+              (map proc (cdr items)))))
