@@ -1,0 +1,6 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/list-operations.scm")
+(define (count-leaves x)
+    (cond ((null? x) 0)
+        ((not (pair? x) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x)))))))
