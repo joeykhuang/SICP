@@ -1,0 +1,12 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/nested-mappings.scm")
+(load "Chapter 1/1.2 Procedures and the Processes They Generate/exercise_1.22.scm")
+(define (unique-pairs n)
+    (flatmap (lambda (i)
+             (map (lambda (j) (list i j))
+                  (enumerate-interval 1 (- i 1))))
+    (enumerate-interval 1 n)))
+
+(define (prime-sum-pairs n)
+    (filter (lambda (x)
+             (is-prime? (+ (car x) (cadr x))))
+            (unique-pairs n)))
