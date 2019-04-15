@@ -1,0 +1,5 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/exercise_2.38.scm")
+(define (reverse sequence)
+    (fold-right (lambda (x y) (append y (list x))) '() sequence))
+(define (reverse sequence)
+    (fold-left (lambda (x y) (append (list y) x)) '() sequence))
