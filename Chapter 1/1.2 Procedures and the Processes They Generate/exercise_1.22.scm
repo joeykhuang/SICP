@@ -1,4 +1,3 @@
-#lang scheme
 (define (timed-prime-test n)
     (newline)
     (display n)
