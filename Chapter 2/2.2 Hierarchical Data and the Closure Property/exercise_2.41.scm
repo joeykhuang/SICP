@@ -1,0 +1,12 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/nested-mappings.scm")
+(define (unique-triples n)
+    (flatmap (lambda (i)
+             (flatmap (lambda (j)
+                (map (lambda (k) (list i j k))
+                    (enumerate-interval 1 (- j 1))))
+        (enumerate-interval 2 (- i 1))))
+    (enumerate-interval 3 n)))
+
+(define (sum-to-s n s)
+    (filter (lambda (x) (= (+ (car x) (cadr x) (last x)) s))
+            (unique-triples n)))
