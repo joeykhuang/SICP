@@ -1,0 +1,6 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/conventional-interfaces.scm")
+(define (accumulate-n op init seqs)
+    (if (null? (car seqs))
+        '()
+        (cons (accumulate op init (map car seqs))
+              (accumulate-n op init (map cdr seqs)))))

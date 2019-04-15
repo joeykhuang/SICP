@@ -1,0 +1,7 @@
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/conventional-interfaces.scm")
+(load "Chapter 2/2.2 Hierarchical Data and the Closure Property/exercise_2.28.scm")
+(define (count-leaves t)
+    (accumulate + 0 (map (lambda (subtree)
+                                (if (pair? subtree)
+                                    (count-leaves subtree)
+                                    1)) t)))
