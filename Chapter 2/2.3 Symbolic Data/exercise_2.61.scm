@@ -1,0 +1,7 @@
+(load "Chapter 2/2.3 Symbolic Data/set-ordered.scm")
+(define (adjoin-set x set)
+    (if (null? set)
+        (list x)
+        (cond ((= x (car set)) set)
+              ((< x (car set)) (cons x set))
+              ((> x (car set)) (cons (car set) (adjoin-set x (cdr set)))))))
