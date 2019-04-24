@@ -29,7 +29,8 @@
           ((exponentiation? exp)
             (make-product
                 (make-product (exponent exp)
-                              (make-exponentiation (base exp) (- (exponent exp) 1)))
+                              (make-exponentiation (base exp) 
+                                                   (make-sum (exponent exp) -1)))
                 (deriv (base exp) var)))
         (else
             (error "unknown expression type: DERIV" exp))))
