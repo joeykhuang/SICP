@@ -47,6 +47,6 @@
     (if (null? pairs)
         '()
         (let ((pair (car pairs)))
-            (adjoin-seet (make-leaf (car pair)
+            (adjoin-set (make-leaf (car pair)
                                     (cadr pair))
                          (make-leaf-set (cdr pairs))))))
