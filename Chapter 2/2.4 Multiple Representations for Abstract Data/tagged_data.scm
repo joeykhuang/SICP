@@ -14,14 +14,10 @@
 
 ; whether the representation is rectangular or polar
 (define (rectangular? z)
-    (eq? (type-tag z) 
-         'rectangular
-))
+    (eq? (type-tag z) 'rectangular ))
 
 (define (polar? z)
-    (eq? (type-tag z)
-         'polar
-))
+    (eq? (type-tag z) 'polar ))
 
 ; selectors for polar representation
 (define (real-part-rectangular z) (car z))
@@ -35,8 +31,7 @@
 (define (make-from-real-imag-rectangular x y)
     (attach-tag 'rectangular (cons x y)))
 (define (make-from-mag-ang-rectangular r a)
-    (attach-tag 'rectangular
-                (cons (* r (cos a)) (* r (sin a)))))
+    (attach-tag 'rectangular (cons (* r (cos a)) (* r (sin a)))))
 
 ; selectors for polar representation
 (define (real-part-polar z)
@@ -50,8 +45,7 @@
                 (cons (sqrt (+ (square x) (square y)))
                       (atan y x))))
 (define (make-from-mag-ang-polar r a)
-    (attach-tag 'polar
-                (cons r a)))
+    (attach-tag 'polar (cons r a)))
 
 ; selector for either representation
 (define (real-part z)

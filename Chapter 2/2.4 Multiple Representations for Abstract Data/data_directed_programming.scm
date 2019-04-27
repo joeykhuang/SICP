@@ -19,8 +19,8 @@
          (lambda (x y) (tag (make-from-real-imag x y))))
     (put 'make-from-mag-ang 'rectangular
          (lambda (r a) (tag (make-from-mag-ang r a))))
-    'done
-)
+    'done )
+
 (define (install-polar-package)
     (define (magnitude z) (car z))
     (define (angle z) (cdr z))
@@ -39,8 +39,7 @@
          (lambda (x y) (tag (make-from-real-imag x y))))
     (put 'make-from-mag-ang 'polar
          (lambda (r a) (tag (make-from-mag-ang r a))))
-    'done
-)
+    'done )
 
 (define (apply-generic op . args)
     (let ((type-tags (map type-tags args)))
