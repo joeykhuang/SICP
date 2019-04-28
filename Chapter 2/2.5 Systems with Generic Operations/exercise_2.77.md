@@ -1,3 +1,5 @@
+# Exercise 2.77
+
 this works because the complex datatype does not explicitly have an operation
 called magnitude definied in the table, so the table correlating the types to
 the operations must be filled out with the following lines of code
@@ -9,4 +11,4 @@ the operations must be filled out with the following lines of code
 
 apply-generic is invoked twice, once to determine the datatype of the numbers
 (complex), and the other to determine the rectangular or polar representation
-of the complex number z. 
+of the complex number z.
