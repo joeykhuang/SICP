@@ -1,0 +1,15 @@
+(define (apply-generic op . args)
+    (let ((type-tags (map type-tag args)))
+        (let ((proc (get op type-tags)))
+            (if proc
+                (apply proc (map contents args))
+                (if (> (length args) 1)
+                    (let ((type1 (car type-tags))
+                          (a1 (car args)))
+                        (let ((all->t1 (map (lambda (type2) (get-coercion type1 type2)))
+                                            (cdr type-tags)))
+                            (if (all->t1)
+                                (apply-generic op a1 (all->t1 (cdr args)))
+                                (apply-generic op (cadr args) (cons a1 (cdr args)))))
+                    (error "No method for these types"
+                           (list op type-tags))))))))
