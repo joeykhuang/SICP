@@ -1,4 +1,5 @@
-(load "Chapter 2/Chapter 2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
+(load "Chapter 2/2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
+(load "Chapter 2/2.4 Multiple Representations for Abstract Data/tagged_data.scm")
 (define (apply-generic op . args)
     (let ((type-tags (map type-tags args)))
         (let ((proc (get op type-tags)))
@@ -103,3 +104,9 @@
     ((get 'make-from-real-imag 'complex ) x y))
 (define (make-complex-from-mag-ang r a)
     ((get 'make-from-mag-ang 'complex ) r a))
+
+(install-rectangular-package)
+(install-polar-package)
+(install-scheme-number-package)
+(install-rational-package)
+(install-complex-package)
