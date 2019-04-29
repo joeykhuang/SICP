@@ -1,4 +1,4 @@
-(load "Chapter 2/Chapter 2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
+(load "Chapter 2/2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
 ; selectors for tags
 (define (attach-tag type-tag contents)
     (cons type-tag contents))

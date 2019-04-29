@@ -1,7 +1,7 @@
 (load "Chapter 2/2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
 (load "Chapter 2/2.4 Multiple Representations for Abstract Data/tagged_data.scm")
 (define (apply-generic op . args)
-    (let ((type-tags (map type-tags args)))
+    (let ((type-tags (map type-tag args)))
         (let ((proc (get op type-tags)))
             (if proc
                 (apply proc (map contents args))
