@@ -1,0 +1,58 @@
+(load "Chapter 2/2.5 Systems with Generic Operations/exercise_2.85.scm")
+(define (install-trigonometric-package)
+    (put 'sine 'scheme-number
+        (lambda (x) (sin x)))
+    (put 'cosine 'scheme-number
+        (lambda (x) (cos x)))
+    (put 'sine 'real
+        (lambda (x) (sin x)))
+    (put 'cosine 'real
+        (lambda (x) (sin x)))
+    (put 'sine 'rational
+        (lambda (x) (sin (/ (cadr x) (cddr x)))))
+    (put 'cosine 'rational
+        (lambda (x) (cos (/ (cadr x) (cddr x)))))
+    'done )
+(install-trigonometric-package)
+(define (cosine n) (apply-generic 'cosine n))
+(define (sine n) (apply-generic 'sine n))
+(define (install-complex-package)
+;; ...
+    (define (add-complex z1 z2)
+        (make-from-real-imag (add (real-part z1) (real-part z2))
+                             (add (imag-part z1) (imag-part z2))))
+    (define (sub-complex z1 z2)
+        (make-from-real-imag (sub (real-part z1) (real-part z2))
+                             (sub (imag-part z1) (imag-part z2))))
+    (define (mul-complex z1 z2)
+        (make-from-mag-ang (mul (magnitude z1) (magnitude z2))
+                           (mul (angle z1) (angle z2))))
+    (define (div-complex z1 z2)
+        (make-from-mag-ang (div (magnitude z1) (magnitude z2))
+                           (sub (angle z1) (angle z2))))
+;; ...
+)
+(define (install-rectangular-package)
+    (define (real-part z) (car z))
+    (define (imag-part z) (cdr z))
+    (define (make-from-real-imag x y) (cons x y))
+    (define (magnitude z)
+        (sqrt (add (square (real-part z))
+                   (square (imag-part z)))))
+    (define (angle z)
+        (atan (imag-part z) (real-part z)))
+    (define (make-from-mag-ang r a)
+        (cons (mul r (cosine a)) (mul r (sine a))))
+;; ...
+)
+(define (install-polar-package)
+    (define (magnitude z) (car z))
+    (define (angle z) (cdr z))
+    (define (make-from-mag-ang x y) (cons x y))
+    (define (real-part z) (mul (magnitude z) (cosine (angle z))))
+    (define (imag-part z) (mul (magnitude z) (sine (angle z))))
+    (define (make-from-real-imag r a)
+        (cons (sqrt (add (square x) (square y)))
+              (atan y x)))
+;; ...
+)
