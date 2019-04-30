@@ -12,6 +12,8 @@
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
 (define (div x y) (apply-generic 'div x y))
+(define (equ? x y) (apply-generic 'equ? x y))
+(define (zero? x y) (apply-generic '=zero? x y))
 ;----------------------------------------------------------------------
 (define (install-scheme-number-package)
     (define (tag x) (attach-tag 'scheme-number x))
@@ -24,10 +26,36 @@
     (put 'div '(scheme-number scheme-number)
          (lambda (x y) (tag (/ x y))))
     (put 'make 'scheme-number (lambda (x) (tag x)))
+    (put 'equ? '(scheme-number scheme-number) =) 
+    (put '=zero? '(scheme-number) 
+        (lambda (x) (= x 0))) 
     'done )
 
 (define (make-scheme-number n)
     ((get 'make 'scheme-number ) n))
+;----------------------------------------------------------------------
+(define (install-real-package)
+    (define (tag x)
+        (attach-tag 'real x))    
+    (put 'add '(real real)
+        (lambda (x y) (tag (+ x y))))
+    (put 'sub '(real real)
+        (lambda (x y) (tag (- x y))))
+    (put 'mul '(real real)
+        (lambda (x y) (tag (* x y))))
+    (put 'div '(real real)
+        (lambda (x y) (tag (/ x y))))
+    (put 'equ? '(real real) =)
+    (put '=zero? '(real)
+        (lambda (x) (= 0 x)))
+    (put 'make 'real
+        (lambda (x) (if (real? x)
+                        (tag x)
+                        (error "non-real value" x))))
+    'done )
+
+(define (make-real n)
+    ((get 'make 'real) n))
 ;----------------------------------------------------------------------
 (define (install-rational-package)
     (define (numer x) (car x))
@@ -49,7 +77,10 @@
     (define (div-rat x y)
             (make-rat (* (numer x) (denom y))
                       (* (denom x) (numer y))))
-
+    (define (equ? x y) 
+        (= (* (numer x) (denom y)) (* (numer y) (denom x)))) 
+    (define (=zero? x)
+        (and (= (numer x) 0) (!= (denom x) 0)))
     (define (tag x) (attach-tag 'rational x))
     (put 'add '(rational rational)
         (lambda (x y) (tag (add-rat x y))))
@@ -61,6 +92,8 @@
         (lambda (x y) (tag (div-rat x y))))
     (put 'make 'rational
         (lambda (n d) (tag (make-rat n d))))
+    (put 'equ? '(rational rational) equ?) 
+    (put '=zero? '(rational) =zero?) 
     'done )
 
 (define (make-rational n d)
@@ -84,6 +117,10 @@
     (define (div-complex z1 z2)
         (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
                            (- (angle z1) (angle z2))))
+    (define (equ? x y) 
+        (and (= (real-part x) (real-part y)) (= (imag-part x) (imag-part y)))) 
+    (define (=zero? x) 
+        (and (= (real-part x) 0) (= (imag-part x) 0))
 
     (define (tag z) (attach-tag 'complex z))
     (put 'add '(complex complex)
@@ -102,6 +139,8 @@
     (put 'imag-part '(complex) imag-part)
     (put 'magnitude '(complex) magnitude)
     (put 'angle '(complex) angle)
+    (put 'equ? '(complex complex) equ?) 
+    (put '=zero? '(complex) =zero?)
     'done )
 
 (define (make-complex-from-real-imag x y) 
@@ -112,5 +151,6 @@
 (install-rectangular-package)
 (install-polar-package)
 (install-scheme-number-package)
+(install-real-package)
 (install-rational-package)
 (install-complex-package)
