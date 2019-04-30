@@ -34,29 +34,6 @@
 (define (make-scheme-number n)
     ((get 'make 'scheme-number ) n))
 ;----------------------------------------------------------------------
-(define (install-real-package)
-    (define (tag x)
-        (attach-tag 'real x))    
-    (put 'add '(real real)
-        (lambda (x y) (tag (+ x y))))
-    (put 'sub '(real real)
-        (lambda (x y) (tag (- x y))))
-    (put 'mul '(real real)
-        (lambda (x y) (tag (* x y))))
-    (put 'div '(real real)
-        (lambda (x y) (tag (/ x y))))
-    (put 'equ? '(real real) =)
-    (put '=zero? '(real)
-        (lambda (x) (= 0 x)))
-    (put 'make 'real
-        (lambda (x) (if (real? x)
-                        (tag x)
-                        (error "non-real value" x))))
-    'done )
-
-(define (make-real n)
-    ((get 'make 'real) n))
-;----------------------------------------------------------------------
 (define (install-rational-package)
     (define (numer x) (car x))
     (define (denom x) (cdr x))
@@ -98,6 +75,29 @@
 
 (define (make-rational n d)
   ((get 'make 'rational ) n d))
+;----------------------------------------------------------------------
+(define (install-real-package)
+    (define (tag x)
+        (attach-tag 'real x))    
+    (put 'add '(real real)
+        (lambda (x y) (tag (+ x y))))
+    (put 'sub '(real real)
+        (lambda (x y) (tag (- x y))))
+    (put 'mul '(real real)
+        (lambda (x y) (tag (* x y))))
+    (put 'div '(real real)
+        (lambda (x y) (tag (/ x y))))
+    (put 'equ? '(real real) =)
+    (put '=zero? '(real)
+        (lambda (x) (= 0 x)))
+    (put 'make 'real
+        (lambda (x) (if (real? x)
+                        (tag x)
+                        (error "non-real value" x))))
+    'done )
+
+(define (make-real n)
+    ((get 'make 'real) n))
 ;----------------------------------------------------------------------
 (define (install-complex-package)
     (define (make-from-real-imag x y)
@@ -142,15 +142,14 @@
     (put 'equ? '(complex complex) equ?) 
     (put '=zero? '(complex) =zero?)
     'done )
-
 (define (make-complex-from-real-imag x y) 
     ((get 'make-from-real-imag 'complex ) x y))
 (define (make-complex-from-mag-ang r a)
     ((get 'make-from-mag-ang 'complex ) r a))
-
+;----------------------------------------------------------------------
 (install-rectangular-package)
 (install-polar-package)
 (install-scheme-number-package)
-(install-real-package)
 (install-rational-package)
+(install-real-package)
 (install-complex-package)

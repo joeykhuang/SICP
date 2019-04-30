@@ -3,11 +3,6 @@
     (put 'equ? '(scheme-number scheme-number) =) 
 'done ) 
 
-(define (install-real-package)
-;; ... 
-    (put 'equ? '(real real) =)
-'done )
-
 (define (install-rational-package) 
     ;; ... 
     (define (equ? x y) 
@@ -15,6 +10,11 @@
     ;; ... 
     (put 'equ? '(rational rational) equ?) 
 'done ) 
+
+(define (install-real-package)
+;; ... 
+    (put 'equ? '(real real) =)
+'done )
 
 (define (install-complex-package) 
     ;; ... 

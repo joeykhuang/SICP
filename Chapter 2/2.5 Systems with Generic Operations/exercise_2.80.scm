@@ -4,12 +4,6 @@
         (lambda (x) (= x 0))) 
 'done ) 
 
-(define (install-real-package)
-;; ... 
-    (put '=zero? '(real)
-        (lambda (x) (= x 0)))
-'done )
-
 (define (install-rational-package) 
 ;; ... 
     (define (=zero? x)
@@ -17,6 +11,12 @@
     ;; ... 
     (put '=zero? '(rational) =zero?) 
 'done ) 
+
+(define (install-real-package)
+;; ... 
+    (put '=zero? '(real)
+        (lambda (x) (= x 0)))
+'done )
 
 (define (install-complex-package) 
 ;; ... 
