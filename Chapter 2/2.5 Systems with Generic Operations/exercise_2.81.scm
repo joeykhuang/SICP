@@ -1,9 +1,15 @@
+(define coercion-table (make-table))
+(define get-coercion (coercion-table 'lookup-proc ))
+(define put-coercion (coercion-table 'insert-proc! ))
+
 (define (scheme-number->scheme-number n) n)
 (define (complex->complex z) z)
+(define (real->real r) r)
 (put-coercion 'scheme-number
               'scheme-number
               scheme-number->scheme-number)
 (put-coercion 'complex 'complex complex->complex)
+(put-coercion 'real 'real real->real)
 
 (define (exp x y) (apply-generic 'exp x y))
 
@@ -31,12 +37,12 @@
                           (a1 (car args))
                           (a2 (cadr args)))
                         (let ((t1->t2 (get-coercion type1 type2))
-                                (t2->t1 (get-coercion type2 type1)))
+                              (t2->t1 (get-coercion type2 type1)))
                             (cond (t1->t2
                                     (apply-generic op (t1->t2 a1) a2))
-                                    (t2->t1
+                                  (t2->t1
                                     (apply-generic op a1 (t2->t1 a2)))
                                 (else (error "No method for these types"
-                                            (list op type-tags)))))))
+                                            (list op type-tags))))))
                     (error "No method for these types"
-                           (list op type-tags))))))
+                           (list op type-tags)))))))
