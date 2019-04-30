@@ -1,4 +1,5 @@
 (load "Chapter 2/2.5 Systems with Generic Operations/exercise_2.83.scm")
+; # TODO: Add support for multiple arguments
 (define (apply-generic op . args)
     (define hierarchy '(complex real rational scheme-number))
     (define (higher-in-tower type1 type2 tower)

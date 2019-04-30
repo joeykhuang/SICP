@@ -29,6 +29,7 @@
     (put 'equ? '(scheme-number scheme-number) =) 
     (put '=zero? '(scheme-number) 
         (lambda (x) (= x 0))) 
+    (put 'project '(scheme-number) false)
     'done )
 
 (define (make-scheme-number n)
@@ -71,6 +72,8 @@
         (lambda (n d) (tag (make-rat n d))))
     (put 'equ? '(rational rational) equ?) 
     (put '=zero? '(rational) =zero?) 
+    (put 'project '(rational) (lambda (x) (make-scheme-number
+                                          (round (/ (numer x) (denom x))))))
     'done )
 
 (define (make-rational n d)
@@ -87,17 +90,18 @@
         (lambda (x y) (tag (* x y))))
     (put 'div '(real real)
         (lambda (x y) (tag (/ x y))))
-    (put 'equ? '(real real) =)
-    (put '=zero? '(real)
-        (lambda (x) (= 0 x)))
     (put 'make 'real
         (lambda (x) (if (real? x)
                         (tag x)
                         (error "non-real value" x))))
+    (put 'equ? '(real real) =)
+    (put '=zero? '(real)
+        (lambda (x) (= 0 x)))
+    (put 'project '(real) (lambda (x) (make-rational (round x) 1))) 
     'done )
 
 (define (make-real n)
-    ((get 'make 'real) n))
+    ((get 'make 'real ) n))
 ;----------------------------------------------------------------------
 (define (install-complex-package)
     (define (make-from-real-imag x y)
@@ -120,7 +124,7 @@
     (define (equ? x y) 
         (and (= (real-part x) (real-part y)) (= (imag-part x) (imag-part y)))) 
     (define (=zero? x) 
-        (and (= (real-part x) 0) (= (imag-part x) 0))
+        (and (= (real-part x) 0) (= (imag-part x) 0)))
 
     (define (tag z) (attach-tag 'complex z))
     (put 'add '(complex complex)
@@ -141,6 +145,7 @@
     (put 'angle '(complex) angle)
     (put 'equ? '(complex complex) equ?) 
     (put '=zero? '(complex) =zero?)
+    (put 'project '(complex) (lambda (x) (make-real (real-part x))))
     'done )
 (define (make-complex-from-real-imag x y) 
     ((get 'make-from-real-imag 'complex ) x y))
