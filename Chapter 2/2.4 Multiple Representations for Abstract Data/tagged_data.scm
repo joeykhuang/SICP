@@ -13,6 +13,19 @@
         (cdr datum)
         (error "Bad tagged datum: TYPE-TAG" datum)))
 
+(define (type-tag x)
+    (if (number? x)
+        'scheme-number
+        (car x)))
+(define (contents x)
+    (if (number? x)
+        x
+        (cdr x)))
+(define (attach-tag type-tag contents)
+    (if (number? x)
+        x
+        (cons type-tag contents)))
+
 ; whether the representation is rectangular or polar
 (define (rectangular? z)
     (eq? (type-tag z) 'rectangular ))
