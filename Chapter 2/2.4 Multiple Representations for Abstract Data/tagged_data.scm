@@ -22,8 +22,8 @@
         x
         (cdr x)))
 (define (attach-tag type-tag contents)
-    (if (number? x)
-        x
+    (if (number? contents)
+        contents
         (cons type-tag contents)))
 
 ; whether the representation is rectangular or polar
