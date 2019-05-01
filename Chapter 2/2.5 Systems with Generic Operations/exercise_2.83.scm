@@ -1,5 +1,5 @@
 (load "Chapter 2/2.5 Systems with Generic Operations/generic_arithmetic.scm")
-
+(load "Chapter 2/2.5 Systems with Generic Operations/exercise_2.81.scm")
 (define (install-real-package)
   (define (tag x)
     (attach-tag 'real x))    
@@ -22,10 +22,12 @@
 
 (install-real-package)
 (define (make-real n)
-    ((get 'make 'real) n))
+    ((get 'make 'real ) n))
 
 (define (scheme-number->rational scheme-number)
-    (make-rational (cdr scheme-number) 1))
+    (if (pair? scheme-number)
+        (make-rational (cdr scheme-number) 1)
+        (make-rational scheme-number 1)))
 (define (rational->real rational)
     (define (integer->floating-point integer) 
         (* integer 1.0)) 

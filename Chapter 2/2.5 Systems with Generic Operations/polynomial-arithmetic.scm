@@ -1,4 +1,4 @@
-(load "Chapter 2/2.5 Systems with Generic Operations/generic_arithmetic.scm")
+(load "Chapter 2/2.5 Systems with Generic Operations/exercise_2.84.scm")
 (define (install-polynomial-package)
     ;; internal procedures
     ;; representation of poly

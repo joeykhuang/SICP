@@ -29,7 +29,8 @@
     (put 'equ? '(scheme-number scheme-number) =) 
     (put '=zero? '(scheme-number) 
         (lambda (x) (= x 0))) 
-    (put 'project '(scheme-number) false)
+    (put 'project '(scheme-number)
+        (lambda (x) (error "Cannot project scheme-number: PROJECT")))
     'done )
 
 (define (make-scheme-number n)
