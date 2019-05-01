@@ -83,10 +83,16 @@
         (lambda (p1 p2) (tag (add-poly p1 p2))))
     (put 'mul '(polynomial polynomial)
         (lambda (p1 p2) (tag (mul-poly p1 p2))))
+    (put 'mul '(polynomial scheme-number)
+        (lambda (p n) (tag (mul-poly p (make-poly 
+                                        (variable p)
+                                        (list (list 0 n)))))))
     (put 'make 'polynomial
         (lambda (var terms) (tag (make-poly var terms))))
     (put '=zero? 'polynomial =zero?)
 'done )
+
+(install-polynomial-package)
 
 (define (make-polynomial var terms)
     ((get 'make 'polynomial ) var terms))
