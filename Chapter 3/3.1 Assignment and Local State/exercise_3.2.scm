@@ -1,0 +1,13 @@
+(define (make-monitored proc)
+    (let ((f proc)
+          (call-times 0))
+        (define (call-proc input)
+            (f input))
+        (define (add-to-calls)
+            (set! call-times (+ call-times 1)))
+        (define (dispatch m)
+            (if (eq? m 'how-many-calls? )
+                call-times
+                (begin (add-to-calls)
+                       (call-proc m))))
+    dispatch))
