@@ -1,0 +1,10 @@
+(load "Chapter 3/3.1 Assignment and Local State/local_state_variables.scm")
+(define (estimate-integral P x1 x2 y1 y2 trials)
+    (define (in-region)
+        (P (random-in-random x1 x2) (random-in-range y1 y2)))
+    (* (monte-carlo trials in-region)
+       (* (- y2 y1) (- x2 x1))))
+
+(define (random-in-range low high)
+    (let ((range (- high low)))
+        (+ low (random range))))
