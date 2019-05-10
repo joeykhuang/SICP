@@ -1,3 +1,4 @@
+(load "Chapter 3/3.3 Modeling with Mutable Data/table-representation.scm")
 (define (assoc key records)
     (cond ((null? records) false)
           ((same-key? key (caar records)) (car records))
