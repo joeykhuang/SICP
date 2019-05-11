@@ -1,0 +1,10 @@
+(define (or-gate a1 a2 output)
+    (let ((s1 (make-wire))
+          (s2 (make-wire))
+          (c (make-wire)))
+        (inverter a1 s1)
+        (inverter a2 s2)
+        (and-gate s1 s2 c)
+        (inverter c output)
+        'ok ))
+; delay time: and-gate-delay + 2 * inverter-delay
