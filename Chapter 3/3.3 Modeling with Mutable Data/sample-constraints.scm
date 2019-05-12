@@ -1,7 +1,6 @@
 (load "Chapter 3/3.3 Modeling with Mutable Data/constraints.scm")
 (define C (make-connector))
 (define F (make-connector))
-(celsius-fahrenheit-converter C F)
 (define (celsius-fahrenheit-converter c f)
     (let ((u (make-connector))
           (v (make-connector))
@@ -16,6 +15,7 @@
         (constant 32 y)
         'ok ))
 
+(celsius-fahrenheit-converter C F)
 (probe "Celsius temp" C)
 (probe "Fahrenheit temp" F)
 

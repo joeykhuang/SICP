@@ -140,6 +140,6 @@
 (define (set-value! connector new-value informant)
     ((connector 'set-value! ) new-value informant))
 (define (forget-value! connector retractor)
-    ((connector 'forget-value! ) retractor))
+    ((connector 'forget ) retractor))
 (define (connect connector new-constraint)
     ((connector 'connect ) new-constraint))
