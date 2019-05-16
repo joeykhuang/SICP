@@ -74,3 +74,5 @@
         ((serializer1 (serializer2 exchange))
          account1
          account2)))
+
+; serializer implementation
