@@ -1,3 +1,4 @@
+(load "Chapter 3/3.5 Streams/infinite-streams.scm")
 (define (sqrt-improve guess x)
     (average guess (/ x guess)))
 
