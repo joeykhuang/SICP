@@ -1,4 +1,4 @@
-(load "../3.5 Streams/stream-iteration.scm")
+(load "Chapter 3/3.5 Streams/stream-iteration.scm")
 (define (stream-append s1 s2)
     (if (stream-null? s1)
         s2
