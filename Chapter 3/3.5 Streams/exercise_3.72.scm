@@ -1,0 +1,20 @@
+(load "Chapter 3/3.5 Streams/exercise_3.71.scm")
+(define (sum-square x) (+ (square (car x)) (square (cadr x)))) 
+(define (squaresn s) 
+    (define (stream-cadr s) (stream-car (stream-cdr s))) 
+    (define (stream-caddr s) (stream-cadr (stream-cdr s))) 
+    (let ((scar (stream-car s)) 
+          (scadr (stream-cadr s)) 
+          (scaddr (stream-caddr s))) 
+        (if (= (sum-square scar) (sum-square scadr) (sum-square scaddr)) 
+            (cons-stream (list (sum-square scar) scar scadr scaddr) 
+                         (squaresn (stream-cdr (stream-cdr (stream-cdr s))))) 
+            (squaresn (stream-cdr s))))) 
+
+(define square-numbers  
+         (squaresn (weighted-pairs integers integers sum-square)))
+
+; 325 --> (1 18) (6 17) (10 15)
+; 425 --> (5 20) (8 19) (13 16)
+; 650 --> (5 25) (11 23) (17 19)
+; 725 --> (7 26) (10 25) (14 23)
