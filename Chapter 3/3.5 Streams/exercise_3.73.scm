@@ -1,0 +1,6 @@
+(load "Chapter 3/3.5 Streams/stream-signals.scm")
+(define (RC resistance capacitance dt)
+    (lambda (current-stream initial-voltage)
+        (add-streams (scale-stream current-stream resistance)
+                    (integral (scale-stream current-stream (/ 1.0 capacitance))
+                            initial-voltage dt))))
