@@ -124,7 +124,7 @@
 (define (cond-actions clause) (cdr clause))
 (define (cond->if exp) (expand-clauses (cond-clauses exp)))
 (define (expand-clauses clauses)
-    (if (null? clause)
+    (if (null? clauses)
         'false 
         (let ((first (car clauses))
               (rest (cdr clauses)))
