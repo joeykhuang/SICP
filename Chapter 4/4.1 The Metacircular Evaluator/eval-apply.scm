@@ -1,16 +1,13 @@
 (define (eval exp env)
     (cond ((self-evaluating? exp) exp)
           ((variable? exp) (lookup-variable-value exp env))
-          ((quoted? exp) (text-of-quotation exp))
+          ((quoted? exp) (eval-quoted exp env))
           ((assignment? exp) (eval-assignment exp env))
           ((definition? exp) (eval-definition exp env))
           ((if? exp) (eval-if exp env))
-          ((lambda? exp) (make-procedure (lambda-parameters exp)
-                                         (lambda-body exp)
-                                         env))
-          ((begin? exp)
-           (eval-sequence (begin-actions exp) env))
-          ((cond? exp) (eval (cond->if exp) env))
+          ((lambda? exp) (eval-lambda exp env))
+          ((begin? exp) (eval-begin exp env))
+          ((cond? exp) (eval-cond exp env))
           ((application? exp)
            (apply (eval (operator exp) env)
                   (list-of-values (operands exp) env)))
@@ -62,6 +59,16 @@
                       env)
     'ok )
 
+(define (eval-quoted exp env) (text-of-quotation exp))
+
+(define (eval-lambda exp env) (make-procedure (lambda-parameters exp)
+                                              (lambda-body exp)
+                                              env))
+
+(define (eval-begin exp env) (eval-sequence (begin-actions exp) env))
+
+(define (eval-cond exp env) (eval (cond->if exp) env))
+
 ; --------------------------------------------------------------
 
 (define (self-evaluating? exp)
@@ -109,9 +116,9 @@
 (define (if-predicate exp) (cadr exp))
 (define (if-consequent exp) (caddr exp))
 (define (if-alternative exp)
-    (if (not (null? caddr exp)))
+    (if (not (null? caddr exp))
         (cadddr exp)
-        'false )
+        'false ))
 
 (define (make-if predicate consequent alternative)
     (list 'if predicate consequent alternative))
