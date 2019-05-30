@@ -21,6 +21,6 @@
 ; (expand-clauses '(((assoc 'b '((a 1) (b 2))) => cadr)
 ;                   (else false)))
 
-(if (assoc 'b '((a 1) (b 2)))
-    (cadr (assoc 'b '((a 1) (b 2))))
-    false)
+;   (if (assoc 'b '((a 1) (b 2)))
+;       (cadr (assoc 'b '((a 1) (b 2))))
+;       false)

@@ -1,4 +1,5 @@
 (load "Chapter 4/4.1 The Metacircular Evaluator/eval-apply.scm")
+(load "Chapter 2/2.4 Multiple Representations for Abstract Data/data_directed_programming.scm")
 (define (eval exp env)
     (cond ((self-evaluating? exp) exp)
           ((variable? exp) (lookup-variable-value exp env))
@@ -16,10 +17,11 @@
 (define (install-syntax)
   (put-syntax! 'quote eval-quoted)
   (put-syntax! 'define eval-definition)
-  (put-syntax! 'set! eval-definition)
+  (put-syntax! 'set! eval-assignment)
   (put-syntax! 'if eval-if)
   (put-syntax! 'lambda eval-lambda)
   (put-syntax! 'begin eval-begin)
   (put-syntax! 'cond eval-cond)
   'done )
+
 (install-syntax)
