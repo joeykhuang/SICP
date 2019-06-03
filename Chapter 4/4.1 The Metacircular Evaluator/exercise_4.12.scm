@@ -24,6 +24,7 @@
     'ok )
 
 (define (define-variable! var val env)
-    (env-loop env var (lambda (x) (add-binding-to-frame! var val (first-frame env)))
+    (env-loop env var (lambda (x) (set-cdr! (first-frame env) (cons (cdr (first-frame env))
+                                                                    (list var val))))
                       (lambda (x) (set-cdr! (car x) val)))
     'ok )
