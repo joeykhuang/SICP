@@ -1,3 +1,4 @@
+(load "Chapter 2/2.5 Systems with Generic Operations/generic_arithmetic.scm")
 (define (eval exp env)
     (cond ((self-evaluating? exp) exp)
           ((variable? exp) (lookup-variable-value exp env))
@@ -32,7 +33,7 @@
 (define (list-of-values exps env)
     (if (no-operands? exps)
         '()
-        (cons (eval (first-operands exps) env)
+        (cons (eval (first-operand exps) env)
               (list-of-values (rest-operands exps) env))))
 
 (define (eval-if exp env)
@@ -55,7 +56,7 @@
 
 (define (eval-definition exp env)
     (define-variable! (definition-variable exp)
-                      (eval (definition value exp) env)
+                      (eval (definition-value exp) env)
                       env)
     'ok )
 
