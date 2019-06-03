@@ -1,3 +1,4 @@
+(load "Chapter 4/4.1 The Metacircular Evaluator/eval-apply.scm")
 (define (true? x) (not (eq? x false)))
 (define (false? x) (eq? x false))
 
@@ -44,7 +45,7 @@
                       (frame-values frame)))))
     (env-loop env))
 
-(define (set-variable-value! var env)
+(define (set-variable-value! var val env)
     (define (env-loop env)
         (define (scan vars vals)
             (cond ((null? vars)
@@ -58,7 +59,7 @@
                       (frame-values frame)))))
     (env-loop env))
 
-(define (define-variable! var env)
+(define (define-variable! var val env)
     (let ((frame (first-frame env)))
         (define (scan vars vals)
             (cond ((null? vars)
