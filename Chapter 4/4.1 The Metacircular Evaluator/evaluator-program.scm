@@ -1,14 +1,4 @@
 (load "Chapter 4/4.1 The Metacircular Evaluator/evaluator-data-structures.scm")
-(define (setup-environment)
-    (let ((initial-env
-           (extend-environment (primitive-procedure-names)
-                               (primitive-procedure-objects)
-                               the-empty-environment)))
-        (define-variable! 'true true initial-env)
-        (define-variable! 'false false initial-env)
-        initial-env))
-(define the-global-environment (setup-environment))
-
 (define (primitive-procedure? proc)
     (tagged-list? proc 'primitive ))
 (define (primitive-implementation proc)
@@ -28,6 +18,16 @@
     (apply-in-underlying-scheme
         (primitive-implementation proc) args))
 (define apply-in-underlying-scheme apply)
+
+(define (setup-environment)
+    (let ((initial-env
+           (extend-environment (primitive-procedure-names)
+                               (primitive-procedure-objects)
+                               the-empty-environment)))
+        (define-variable! 'true true initial-env)
+        (define-variable! 'false false initial-env)
+        initial-env))
+(define the-global-environment (setup-environment))
 
 ; --- Basic I/O
 (define input-prompt ";;; M-Eval input:")
